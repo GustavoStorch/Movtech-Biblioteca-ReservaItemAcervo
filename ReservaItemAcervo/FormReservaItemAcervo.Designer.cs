@@ -189,7 +189,6 @@
             this.txtCodItem.Name = "txtCodItem";
             this.txtCodItem.Size = new System.Drawing.Size(183, 26);
             this.txtCodItem.TabIndex = 12;
-            this.txtCodItem.TextChanged += new System.EventHandler(this.txtCodItem_TextChanged);
             // 
             // txtNomeItem
             // 
