@@ -27,7 +27,89 @@ namespace ReservaItemAcervo
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                using (SqlConnection connection = DaoConnection.GetConexao())
+                {
+                    ReservaDAO dao = new ReservaDAO(connection);
 
+                    //Verifica se os campos estão preenchidos corretamente
+                    bool verificaCampos = dao.VerificaCampos(new ReservaModel()
+                    {
+                        DataReserva = dtpDataReserva.Text,
+                        PrazoReserva = dtpDataDevolucao.Text
+                    }, new ItemAcervoModel()
+                    {
+                        CodItem = txtCodItem.Text,
+                        NomeItem = txtNomeItem.Text,
+                        NumExemplar = txtNumExemplar.Text,
+                        TipoItem = txtTipoItem.Text,
+                        Localizacao = txtLocalizacao.Text
+                    }, new LeitorModel()
+                    {
+                        CodLeitor = txtCodLeitor.Text,
+                        NomeLeitor = txtNomeLeitor.Text
+                    });
+
+                    if (verificaCampos)
+                    {
+                        int count = dao.VerificaRegistros(new ItemAcervoModel()
+                        {
+                            CodItem = txtCodItem.Text
+                        });
+
+                        if (count > 0)
+                        {
+                            dao.Editar(new ReservaModel()
+                            {
+                                DataReserva = dtpDataReserva.Text,
+                                PrazoReserva = dtpDataDevolucao.Text,
+                                TipoMovimento = cbxTipoMovimento.Text
+                            }, new ItemAcervoModel()
+                            {
+                                CodItem = txtCodItem.Text,
+                                NomeItem = txtNomeItem.Text,
+                                NumExemplar = txtNumExemplar.Text,
+                                TipoItem = txtTipoItem.Text,
+                                Localizacao = txtLocalizacao.Text
+                            }, new LeitorModel()
+                            {
+                                CodLeitor = txtCodLeitor.Text,
+                                NomeLeitor = txtNomeLeitor.Text
+                            });
+                            MessageBox.Show("Reserva atualizada com sucesso!");
+                            limparForm();
+                        }
+                        else
+                        {
+                            dao.Salvar(new ReservaModel()
+                            {
+                                DataReserva = dtpDataReserva.Text,
+                                PrazoReserva = dtpDataDevolucao.Text,
+                                TipoMovimento = cbxTipoMovimento.Text
+                            }, new ItemAcervoModel()
+                            {
+                                CodItem = txtCodItem.Text,
+                                NomeItem = txtNomeItem.Text,
+                                NumExemplar = txtNumExemplar.Text,
+                                TipoItem = txtTipoItem.Text,
+                                Localizacao = txtLocalizacao.Text
+                            }, new LeitorModel()
+                            {
+                                CodLeitor = txtCodLeitor.Text,
+                                NomeLeitor = txtNomeLeitor.Text
+                            });
+                            MessageBox.Show("Reserva salva com sucesso!");
+                            limparForm();
+                        }
+                    }
+                    InitializeTable();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Houve um problema ao realizar a reserva!\n{ex.Message}");
+            }
         }
 
         public void limparForm()
@@ -86,6 +168,47 @@ namespace ReservaItemAcervo
                 dtpDataReserva.Text = dtgDadosReserva.Rows[e.RowIndex].Cells[colDataReserva.Index].Value + "";
                 dtpDataDevolucao.Text = dtgDadosReserva.Rows[e.RowIndex].Cells[colDataRetorno.Index].Value + "";
                 cbxTipoMovimento.Text = dtgDadosReserva.Rows[e.RowIndex].Cells[colTipoMovimento.Index].Value + "";
+            }
+        }
+
+        private void txtCodLeitor_TextChanged(object sender, EventArgs e)
+        {
+            using (SqlConnection connection = DaoConnection.GetConexao())
+            {
+                ReservaDAO dao = new ReservaDAO(connection);
+
+                txtNomeLeitor.Text = dao.GetNomeLeitor(new LeitorModel()
+                {
+                    CodLeitor = txtCodLeitor.Text
+                });
+            }
+        }
+
+        private void txtCodItem_TextChanged(object sender, EventArgs e)
+        {
+            using (SqlConnection connection = DaoConnection.GetConexao())
+            {
+                ReservaDAO dao = new ReservaDAO(connection);
+
+                txtNomeItem.Text = dao.GetNomeItem(new ItemAcervoModel()
+                {
+                    CodItem = txtCodItem.Text
+                });
+
+                txtNumExemplar.Text = dao.GetNumExemplar(new ItemAcervoModel()
+                 {
+                     CodItem = txtCodItem.Text
+                 });
+
+                txtTipoItem.Text = dao.GetTipoItem(new ItemAcervoModel()
+                {
+                    CodItem = txtCodItem.Text
+                });
+
+                txtLocalizacao.Text = dao.GetLocalizacao(new ItemAcervoModel()
+                {
+                    CodItem = txtCodItem.Text
+                });
             }
         }
     }

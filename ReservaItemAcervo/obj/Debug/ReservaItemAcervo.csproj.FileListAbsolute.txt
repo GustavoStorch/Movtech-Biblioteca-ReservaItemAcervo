@@ -9,3 +9,14 @@ C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-ReservaItemA
 C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-ReservaItemAcervo\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.csproj.CoreCompileInputs.cache
 C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-ReservaItemAcervo\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.exe
 C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-ReservaItemAcervo\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.pdb
+C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaItemAcervo\bin\Debug\ReservaItemAcervo.exe.config
+C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaItemAcervo\bin\Debug\ReservaItemAcervo.exe
+C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaItemAcervo\bin\Debug\ReservaItemAcervo.pdb
+C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.csproj.AssemblyReference.cache
+C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.csproj.SuggestedBindingRedirects.cache
+C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.FormReservaItemAcervo.resources
+C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.Properties.Resources.resources
+C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.csproj.GenerateResource.cache
+C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.csproj.CoreCompileInputs.cache
+C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.exe
+C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.pdb

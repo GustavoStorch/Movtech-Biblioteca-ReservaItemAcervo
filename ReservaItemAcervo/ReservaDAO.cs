@@ -92,6 +92,109 @@ namespace ReservaItemAcervo
             }
         }
 
+        public int VerificaRegistros(ItemAcervoModel itemAcervo)
+        {
+            using (SqlCommand command = Connection.CreateCommand())
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.AppendLine($"SELECT COUNT(codItem) FROM mvtBibReserva WHERE codItem = @codItem");
+                command.CommandText = sql.ToString();
+                command.Parameters.AddWithValue("@codItem", itemAcervo.CodItem);
+                int count = Convert.ToInt32(command.ExecuteScalar());
+                return count;
+            }
+        }
+
+        public string GetNomeLeitor(LeitorModel leitor)
+        {
+            using (SqlCommand command = Connection.CreateCommand())
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.AppendLine($"SELECT nomeLeitor FROM mvtBibLeitor WHERE codLeitor = @codLeitor");
+                command.CommandText = sql.ToString();
+                command.Parameters.AddWithValue("@codLeitor", leitor.CodLeitor);
+                string result = Convert.ToString(command.ExecuteScalar());
+
+                if (result != null)
+                {
+                    return result.ToString();
+                }
+            }
+            return string.Empty;
+        }
+
+        public string GetNomeItem(ItemAcervoModel itemAcervo)
+        {
+            using (SqlCommand command = Connection.CreateCommand())
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.AppendLine($"SELECT nome FROM mvtBibItemAcervo WHERE codItem = @codItem");
+                command.CommandText = sql.ToString();
+                command.Parameters.AddWithValue("@codItem", itemAcervo.CodItem);
+                string result = Convert.ToString(command.ExecuteScalar());
+
+                if (result != null)
+                {
+                    return result.ToString();
+                }
+            }
+            return string.Empty;
+        }
+
+        public string GetNumExemplar(ItemAcervoModel itemAcervo)
+        {
+            using (SqlCommand command = Connection.CreateCommand())
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.AppendLine($"SELECT numExemplar FROM mvtBibItemAcervo WHERE codItem = @codItem");
+                command.CommandText = sql.ToString();
+                command.Parameters.AddWithValue("@codItem", itemAcervo.CodItem);
+                string result = Convert.ToString(command.ExecuteScalar());
+
+                if (result != null)
+                {
+                    return result.ToString();
+                }
+            }
+            return string.Empty;
+        }
+
+        public string GetTipoItem(ItemAcervoModel itemAcervo)
+        {
+            using (SqlCommand command = Connection.CreateCommand())
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.AppendLine($"SELECT tipoItem FROM mvtBibItemAcervo WHERE codItem = @codItem");
+                command.CommandText = sql.ToString();
+                command.Parameters.AddWithValue("@codItem", itemAcervo.CodItem);
+                string result = Convert.ToString(command.ExecuteScalar());
+
+                if (result != null)
+                {
+                    return result.ToString();
+                }
+            }
+            return string.Empty;
+        }
+
+        public string GetLocalizacao(ItemAcervoModel itemAcervo)
+        {
+            using (SqlCommand command = Connection.CreateCommand())
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.AppendLine($"SELECT nomeLocal FROM mvtBibItemAcervo WHERE codItem = @codItem");
+                command.CommandText = sql.ToString();
+                command.Parameters.AddWithValue("@codItem", itemAcervo.CodItem);
+                string result = Convert.ToString(command.ExecuteScalar());
+
+                if (result != null)
+                {
+                    return result.ToString();
+                }
+            }
+            return string.Empty;
+        }
+
         public bool VerificaCampos(ReservaModel reserva, ItemAcervoModel itemAcervo, LeitorModel leitor)
         {
             if (string.IsNullOrEmpty(itemAcervo.CodItem) || string.IsNullOrWhiteSpace(itemAcervo.CodItem))
