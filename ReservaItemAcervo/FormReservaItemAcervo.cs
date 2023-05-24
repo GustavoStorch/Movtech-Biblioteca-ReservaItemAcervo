@@ -23,6 +23,23 @@ namespace ReservaItemAcervo
         {
             InitializeTable();
             limparForm();
+            btnLimpar.Enabled = false;
+        }
+
+        public void CarregaFormBuscaItemAcervo()
+        {
+            FormBuscaItemAcervo formBuscaItemAcervo = new FormBuscaItemAcervo();
+            formBuscaItemAcervo.ShowDialog();
+
+            txtCodItem.Text = formBuscaItemAcervo.codItem;
+        }
+
+        public void CarregaFormBuscaLeitor()
+        {
+            FormBuscaLeitor formBuscaLeitor = new FormBuscaLeitor();
+            formBuscaLeitor.ShowDialog();
+
+            txtCodLeitor.Text = formBuscaLeitor.codLeitor;
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -36,8 +53,8 @@ namespace ReservaItemAcervo
                     //Verifica se os campos estão preenchidos corretamente
                     bool verificaCampos = dao.VerificaCampos(new ReservaModel()
                     {
-                        DataReserva = dtpDataReserva.Text,
-                        PrazoReserva = dtpDataDevolucao.Text
+                        DataReserva = dtpDataReserva.Value.Date.ToString(),
+                        PrazoReserva = dtpDataDevolucao.Value.Date.ToString()
                     }, new ItemAcervoModel()
                     {
                         CodItem = txtCodItem.Text,
@@ -53,39 +70,10 @@ namespace ReservaItemAcervo
 
                     if (verificaCampos)
                     {
-                        int count = dao.VerificaRegistros(new ItemAcervoModel()
-                        {
-                            CodItem = txtCodItem.Text
-                        });
-
-                        if (count > 0)
-                        {
-                            dao.Editar(new ReservaModel()
-                            {
-                                DataReserva = dtpDataReserva.Text,
-                                PrazoReserva = dtpDataDevolucao.Text,
-                                TipoMovimento = cbxTipoMovimento.Text
-                            }, new ItemAcervoModel()
-                            {
-                                CodItem = txtCodItem.Text,
-                                NomeItem = txtNomeItem.Text,
-                                NumExemplar = txtNumExemplar.Text,
-                                TipoItem = txtTipoItem.Text,
-                                Localizacao = txtLocalizacao.Text
-                            }, new LeitorModel()
-                            {
-                                CodLeitor = txtCodLeitor.Text,
-                                NomeLeitor = txtNomeLeitor.Text
-                            });
-                            MessageBox.Show("Reserva atualizada com sucesso!");
-                            limparForm();
-                        }
-                        else
-                        {
                             dao.Salvar(new ReservaModel()
                             {
-                                DataReserva = dtpDataReserva.Text,
-                                PrazoReserva = dtpDataDevolucao.Text,
+                                DataReserva = dtpDataReserva.Value.Date.ToString(),
+                                PrazoReserva = dtpDataDevolucao.Value.Date.ToString(),
                                 TipoMovimento = cbxTipoMovimento.Text
                             }, new ItemAcervoModel()
                             {
@@ -93,7 +81,8 @@ namespace ReservaItemAcervo
                                 NomeItem = txtNomeItem.Text,
                                 NumExemplar = txtNumExemplar.Text,
                                 TipoItem = txtTipoItem.Text,
-                                Localizacao = txtLocalizacao.Text
+                                Localizacao = txtLocalizacao.Text,
+                                StatusItem = cbxStatusItem.Text                                
                             }, new LeitorModel()
                             {
                                 CodLeitor = txtCodLeitor.Text,
@@ -101,9 +90,10 @@ namespace ReservaItemAcervo
                             });
                             MessageBox.Show("Reserva salva com sucesso!");
                             limparForm();
-                        }
+                        
                     }
                     InitializeTable();
+                    btnLimpar.Enabled = false;
                 }
             }
             catch (Exception ex)
@@ -145,8 +135,8 @@ namespace ReservaItemAcervo
                     row.Cells[colLocalizacao.Index].Value = reserva.ItemAcervoModel.Localizacao;
                     row.Cells[colCodLeitor.Index].Value = reserva.LeitorModel.CodLeitor;
                     row.Cells[colNomeLeitor.Index].Value = reserva.LeitorModel.NomeLeitor;
-                    row.Cells[colDataReserva.Index].Value = reserva.DataReserva;
-                    row.Cells[colDataRetorno.Index].Value = reserva.PrazoReserva;
+                    row.Cells[colDataReserva.Index].Value = reserva.DataReserva.Substring(0, 10);
+                    row.Cells[colDataRetorno.Index].Value = reserva.PrazoReserva.Substring(0, 10);
                     row.Cells[colEncerrar.Index].Value = reserva.Encerrar;
                     row.Cells[colTipoMovimento.Index].Value = reserva.TipoMovimento;
                 }
@@ -168,7 +158,8 @@ namespace ReservaItemAcervo
                 dtpDataReserva.Text = dtgDadosReserva.Rows[e.RowIndex].Cells[colDataReserva.Index].Value + "";
                 dtpDataDevolucao.Text = dtgDadosReserva.Rows[e.RowIndex].Cells[colDataRetorno.Index].Value + "";
                 cbxTipoMovimento.Text = dtgDadosReserva.Rows[e.RowIndex].Cells[colTipoMovimento.Index].Value + "";
-            }
+            }                
+            btnLimpar.Enabled = true;
         }
 
         private void txtCodLeitor_TextChanged(object sender, EventArgs e)
@@ -209,7 +200,53 @@ namespace ReservaItemAcervo
                 {
                     CodItem = txtCodItem.Text
                 });
+
+                cbxStatusItem.Text = dao.GetStatusItem(new ItemAcervoModel()
+                {
+                    CodItem = txtCodItem.Text
+                });
             }
+        }
+
+        private void btnBuscarItem_Click(object sender, EventArgs e)
+        {
+            CarregaFormBuscaItemAcervo();
+        }
+
+        private void btnBuscarLeitor_Click(object sender, EventArgs e)
+        {
+            CarregaFormBuscaLeitor();
+        }
+
+        private void cbxTipoMovimento_TextChanged(object sender, EventArgs e)
+        {
+            /*string situacao = cbxTipoMovimento.Text;
+            if (situacao == "Reservar")
+            {
+                cbxStatusItem.SelectedIndex = 1;
+            }*/
+        }
+
+        private void txtCodItem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && !Char.IsControl(e.KeyChar) && !(e.KeyChar == (char)Keys.Space))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtCodLeitor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && !Char.IsControl(e.KeyChar) && !(e.KeyChar == (char)Keys.Space))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            limparForm();
+            btnLimpar.Enabled = false;
         }
     }
 }

@@ -20,3 +20,5 @@ C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaI
 C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.csproj.CoreCompileInputs.cache
 C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.exe
 C:\Users\Gustavo\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Reserva\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.pdb
+C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-ReservaItemAcervo\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.FormBuscaItemAcervo.resources
+C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-ReservaItemAcervo\ReservaItemAcervo\obj\Debug\ReservaItemAcervo.FormBuscaLeitor.resources

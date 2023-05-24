@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ReservaItemAcervo
 {
@@ -26,9 +27,9 @@ namespace ReservaItemAcervo
                 {
                     StringBuilder sql = new StringBuilder();
                     sql.AppendLine($"INSERT INTO mvtBibReserva(codItem, statusItem, nomeItem, numExemplar, tipoItem, localizacao, codLeitor, nomeLeitor, ");
-                    sql.AppendLine($"dataReserva, prazoReserva, encerrar, tipoMovimento) ");
+                    sql.AppendLine($"dataReserva, prazoReserva, tipoMovimento) ");
                     sql.AppendLine($"VALUES (@codItem, @statusItem, @nomeItem, @numExemplar, @tipoItem, @localizacao, @codLeitor, @nomeLeitor, ");
-                    sql.AppendLine($"@dataReserva, @prazoReserva, @encerrar, @tipoMovimento) ");
+                    sql.AppendLine($"@dataReserva, @prazoReserva, @tipoMovimento) ");
                     command.CommandText = sql.ToString();
                     command.Parameters.Add(new SqlParameter("@codItem", itemAcervo.CodItem));
                     command.Parameters.Add(new SqlParameter("@statusItem", itemAcervo.StatusItem));
@@ -40,7 +41,7 @@ namespace ReservaItemAcervo
                     command.Parameters.Add(new SqlParameter("@nomeLeitor", leitor.NomeLeitor));
                     command.Parameters.Add(new SqlParameter("@dataReserva", reserva.DataReserva));
                     command.Parameters.Add(new SqlParameter("@prazoReserva", reserva.PrazoReserva));
-                    command.Parameters.Add(new SqlParameter("@encerrar", reserva.Encerrar));
+                    //command.Parameters.Add(new SqlParameter("@encerrar", reserva.Encerrar));
                     command.Parameters.Add(new SqlParameter("@tipoMovimento", reserva.TipoMovimento));
 
                     command.Transaction = t;
@@ -55,7 +56,7 @@ namespace ReservaItemAcervo
             }
         }
 
-        public void Editar(ReservaModel reserva, ItemAcervoModel itemAcervo, LeitorModel leitor)
+        /*public void Editar(ReservaModel reserva, ItemAcervoModel itemAcervo, LeitorModel leitor)
         {
             using (SqlCommand command = Connection.CreateCommand())
             {
@@ -65,7 +66,7 @@ namespace ReservaItemAcervo
                     StringBuilder sql = new StringBuilder();
                     sql.AppendLine($"UPDATE mvtBibReserva SET codItem = @codItem, statusItem = @statusItem, nomeItem = @nomeItem, " +
                         $"numExemplar = @numExemplar, tipoItem = @tipoItem, localizacao = @localizacao, codLeitor = @codLeitor, nomeLeitor = @nomeLeitor," +
-                        $"dataReserva = @dataReserva, prazoReserva = @prazoReserva, encerrar = @encerrar, tipoMovimento = @tipoMovimento," +
+                        $"dataReserva = @dataReserva, prazoReserva = @prazoReserva, tipoMovimento = @tipoMovimento," +
                         $" WHERE codItem = @codItem");
                     command.CommandText = sql.ToString();
                     command.Parameters.Add(new SqlParameter("@codItem", itemAcervo.CodItem));
@@ -78,7 +79,7 @@ namespace ReservaItemAcervo
                     command.Parameters.Add(new SqlParameter("@nomeLeitor", leitor.NomeLeitor));
                     command.Parameters.Add(new SqlParameter("@dataReserva", reserva.DataReserva));
                     command.Parameters.Add(new SqlParameter("@prazoReserva", reserva.PrazoReserva));
-                    command.Parameters.Add(new SqlParameter("@encerrar", reserva.Encerrar));
+                    //command.Parameters.Add(new SqlParameter("@encerrar", reserva.Encerrar));
                     command.Parameters.Add(new SqlParameter("@tipoMovimento", reserva.TipoMovimento));
                     command.Transaction = t;
                     command.ExecuteNonQuery();
@@ -90,7 +91,7 @@ namespace ReservaItemAcervo
                     throw ex;
                 }
             }
-        }
+        }*/
 
         public int VerificaRegistros(ItemAcervoModel itemAcervo)
         {
@@ -195,6 +196,24 @@ namespace ReservaItemAcervo
             return string.Empty;
         }
 
+        public string GetStatusItem(ItemAcervoModel itemAcervo)
+        {
+            using (SqlCommand command = Connection.CreateCommand())
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.AppendLine($"SELECT statusItem FROM mvtBibItemAcervo WHERE codItem = @codItem");
+                command.CommandText = sql.ToString();
+                command.Parameters.AddWithValue("@codItem", itemAcervo.CodItem);
+                string result = Convert.ToString(command.ExecuteScalar());
+
+                if (result != null)
+                {
+                    return result.ToString();
+                }
+            }
+            return string.Empty;
+        }
+
         public bool VerificaCampos(ReservaModel reserva, ItemAcervoModel itemAcervo, LeitorModel leitor)
         {
             if (string.IsNullOrEmpty(itemAcervo.CodItem) || string.IsNullOrWhiteSpace(itemAcervo.CodItem))
@@ -273,13 +292,7 @@ namespace ReservaItemAcervo
             string encerrar = "";
             string tipoMovimento = "";
             LeitorModel codLeitor = null;
-            LeitorModel nomeLeitor = null;
             ItemAcervoModel codItem = null;
-            ItemAcervoModel statusItem = null;
-            ItemAcervoModel nomeItem = null;
-            ItemAcervoModel numExemplar = null;
-            ItemAcervoModel tipoItem = null;
-            ItemAcervoModel localizacao = null;
 
             if (DBNull.Value != dr["dataReserva"])
             {
@@ -300,67 +313,32 @@ namespace ReservaItemAcervo
             if (DBNull.Value != dr["codLeitor"])
             {
                 string leitorCod = dr["codLeitor"] + "";
+                string leitorNome = dr["nomeLeitor"] + "";
                 codLeitor = new LeitorModel()
                 {
-                    CodLeitor = leitorCod
-                };
-            }
-            if (DBNull.Value != dr["nomeLeitor"])
-            {
-                string leitorNome = dr["nomeLeitor"] + "";
-                nomeLeitor = new LeitorModel()
-                {
+                    CodLeitor = leitorCod,
                     NomeLeitor = leitorNome
                 };
             }
             if (DBNull.Value != dr["codItem"])
             {
                 string itemAcervoCod = dr["codItem"] + "";
+                string statusItem = dr["statusItem"] + "";
+                string nomeItem = dr["nomeItem"] + "";
+                string numExemplar = dr["numExemplar"] + "";
+                string tipoItem = dr["tipoItem"] + "";
+                string localizacao = dr["localizacao"] + "";
                 codItem = new ItemAcervoModel()
                 {
-                    CodItem = itemAcervoCod
+                    CodItem = itemAcervoCod,
+                    StatusItem = statusItem,
+                    NomeItem = nomeItem,
+                    NumExemplar = numExemplar,
+                    TipoItem = tipoItem,
+                    Localizacao = localizacao
                 };
             }
-            if (DBNull.Value != dr["statusItem"])
-            {
-                string status = dr["statusItem"] + "";
-                statusItem = new ItemAcervoModel()
-                {
-                    StatusItem = status
-                };
-            }
-            if (DBNull.Value != dr["nomeItem"])
-            {
-                string nome = dr["nomeItem"] + "";
-                nomeItem = new ItemAcervoModel()
-                {
-                    NomeItem = nome
-                };
-            }
-            if (DBNull.Value != dr["numExemplar"])
-            {
-                string num = dr["numExemplar"] + "";
-                numExemplar = new ItemAcervoModel()
-                {
-                    NumExemplar = num
-                };
-            }
-            if (DBNull.Value != dr["tipoItem"])
-            {
-                string tipo = dr["tipoItem"] + "";
-                tipoItem = new ItemAcervoModel()
-                {
-                    TipoItem = tipo
-                };
-            }
-            if (DBNull.Value != dr["localizacao"])
-            {
-                string loc = dr["localizacao"] + "";
-                localizacao = new ItemAcervoModel()
-                {
-                    Localizacao = loc
-                };
-            }
+
             return new ReservaModel()
             {
                 DataReserva = dataReserva,
@@ -368,13 +346,7 @@ namespace ReservaItemAcervo
                 Encerrar = encerrar,
                 TipoMovimento = tipoMovimento,
                 LeitorModel = codLeitor,
-                //leitorModel = nomeLeitor,
-                ItemAcervoModel = codItem,
-                //ItemAcervoModel = statusItem,
-                //ItemAcervoModel = nomeItem,
-                //ItemAcervoModel = numExemplar,
-                //ItemAcervoModel = tipoItem,
-                //ItemAcervoModel = localizacao,
+                ItemAcervoModel = codItem
             };
         }
     }
