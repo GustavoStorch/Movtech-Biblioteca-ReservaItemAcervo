@@ -70,6 +70,14 @@ namespace ReservaItemAcervo
 
                     if (verificaCampos)
                     {
+                        bool verificaEmprestimo = dao.VerificaEmprestimo(new ItemAcervoModel()
+                        {
+                            CodItem = txtCodItem.Text
+                        });
+
+                        if (verificaEmprestimo)
+                        {
+
                             dao.Salvar(new ReservaModel()
                             {
                                 DataReserva = dtpDataReserva.Value.Date.ToString(),
@@ -82,7 +90,7 @@ namespace ReservaItemAcervo
                                 NumExemplar = txtNumExemplar.Text,
                                 TipoItem = txtTipoItem.Text,
                                 Localizacao = txtLocalizacao.Text,
-                                StatusItem = cbxStatusItem.Text                                
+                                StatusItem = cbxStatusItem.Text
                             }, new LeitorModel()
                             {
                                 CodLeitor = txtCodLeitor.Text,
@@ -96,7 +104,7 @@ namespace ReservaItemAcervo
                             });
                             MessageBox.Show("Reserva salva com sucesso!");
                             limparForm();
-                        
+                        }
                     }
                     InitializeTable();
                     btnLimpar.Enabled = false;

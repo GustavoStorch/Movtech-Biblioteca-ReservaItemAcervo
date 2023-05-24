@@ -220,6 +220,31 @@ namespace ReservaItemAcervo
             return string.Empty;
         }
 
+        public bool VerificaEmprestimo(ItemAcervoModel itemAcervo)
+        {
+            using (SqlCommand command = Connection.CreateCommand())
+            {
+
+                StringBuilder sql = new StringBuilder();
+                sql.AppendLine($"select statusItem from mvtBibItemAcervo where codItem = @codItem");
+                command.CommandText = sql.ToString();
+                command.Parameters.AddWithValue("@codItem", itemAcervo.CodItem);
+                string result = Convert.ToString(command.ExecuteScalar());
+
+                if (result == "Reservado")
+                {
+                    MessageBox.Show("O item do acervo já está reservado!");
+                    return false;
+                }
+                if(result == "Emprestado")
+                {
+                    MessageBox.Show("O item do acervo já está emprestado!");
+                    return false;
+                }
+                return true;
+            }
+        }
+
         public bool VerificaCampos(ReservaModel reserva, ItemAcervoModel itemAcervo, LeitorModel leitor)
         {
             if (string.IsNullOrEmpty(itemAcervo.CodItem) || string.IsNullOrWhiteSpace(itemAcervo.CodItem))
