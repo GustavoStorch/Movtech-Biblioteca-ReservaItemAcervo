@@ -56,6 +56,30 @@ namespace ReservaItemAcervo
             }
         }
 
+        public void AtualizaItemAcervo(ItemAcervoModel itemAcervo)
+        {
+            using (SqlCommand command = Connection.CreateCommand())
+            {
+                SqlTransaction t = Connection.BeginTransaction();
+                try
+                {
+                    StringBuilder sql = new StringBuilder();
+                    sql.AppendLine($"UPDATE mvtBibItemAcervo SET statusItem = @statusItem WHERE codItem = @codItem");
+                    command.CommandText = sql.ToString();
+                    command.Parameters.Add(new SqlParameter("@statusItem", itemAcervo.StatusItem));
+                    command.Parameters.Add(new SqlParameter("@codItem", itemAcervo.CodItem));
+                    command.Transaction = t;
+                    command.ExecuteNonQuery();
+                    t.Commit();
+                }
+                catch (Exception ex)
+                {
+                    t.Rollback();
+                    throw ex;
+                }
+            }
+        }
+
         /*public void Editar(ReservaModel reserva, ItemAcervoModel itemAcervo, LeitorModel leitor)
         {
             using (SqlCommand command = Connection.CreateCommand())
@@ -196,24 +220,6 @@ namespace ReservaItemAcervo
             return string.Empty;
         }
 
-        public string GetStatusItem(ItemAcervoModel itemAcervo)
-        {
-            using (SqlCommand command = Connection.CreateCommand())
-            {
-                StringBuilder sql = new StringBuilder();
-                sql.AppendLine($"SELECT statusItem FROM mvtBibItemAcervo WHERE codItem = @codItem");
-                command.CommandText = sql.ToString();
-                command.Parameters.AddWithValue("@codItem", itemAcervo.CodItem);
-                string result = Convert.ToString(command.ExecuteScalar());
-
-                if (result != null)
-                {
-                    return result.ToString();
-                }
-            }
-            return string.Empty;
-        }
-
         public bool VerificaCampos(ReservaModel reserva, ItemAcervoModel itemAcervo, LeitorModel leitor)
         {
             if (string.IsNullOrEmpty(itemAcervo.CodItem) || string.IsNullOrWhiteSpace(itemAcervo.CodItem))
@@ -291,8 +297,8 @@ namespace ReservaItemAcervo
             string prazoReserva = "";
             string encerrar = "";
             string tipoMovimento = "";
-            LeitorModel codLeitor = null;
-            ItemAcervoModel codItem = null;
+            LeitorModel leitor = null;
+            ItemAcervoModel itemAcervo = null;
 
             if (DBNull.Value != dr["dataReserva"])
             {
@@ -314,7 +320,7 @@ namespace ReservaItemAcervo
             {
                 string leitorCod = dr["codLeitor"] + "";
                 string leitorNome = dr["nomeLeitor"] + "";
-                codLeitor = new LeitorModel()
+                leitor = new LeitorModel()
                 {
                     CodLeitor = leitorCod,
                     NomeLeitor = leitorNome
@@ -328,7 +334,7 @@ namespace ReservaItemAcervo
                 string numExemplar = dr["numExemplar"] + "";
                 string tipoItem = dr["tipoItem"] + "";
                 string localizacao = dr["localizacao"] + "";
-                codItem = new ItemAcervoModel()
+                itemAcervo = new ItemAcervoModel()
                 {
                     CodItem = itemAcervoCod,
                     StatusItem = statusItem,
@@ -345,8 +351,8 @@ namespace ReservaItemAcervo
                 PrazoReserva = prazoReserva,
                 Encerrar = encerrar,
                 TipoMovimento = tipoMovimento,
-                LeitorModel = codLeitor,
-                ItemAcervoModel = codItem
+                LeitorModel = leitor,
+                ItemAcervoModel = itemAcervo
             };
         }
     }

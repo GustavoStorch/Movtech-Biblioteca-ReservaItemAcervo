@@ -180,7 +180,6 @@
             this.cbxTipoMovimento.Items.AddRange(new object[] {
             "Reservar",
             "Empréstimo",
-            "",
             "Devolver"});
             this.cbxTipoMovimento.Location = new System.Drawing.Point(152, 32);
             this.cbxTipoMovimento.Name = "cbxTipoMovimento";
@@ -334,7 +333,7 @@
             // 
             this.btnBuscarLeitor.FlatAppearance.BorderSize = 0;
             this.btnBuscarLeitor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscarLeitor.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.btnBuscarLeitor.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnBuscarLeitor.Image = global::ReservaItemAcervo.Properties.Resources.lupa__1_;
             this.btnBuscarLeitor.Location = new System.Drawing.Point(276, 118);
             this.btnBuscarLeitor.Name = "btnBuscarLeitor";

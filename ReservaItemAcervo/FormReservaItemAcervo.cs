@@ -88,6 +88,12 @@ namespace ReservaItemAcervo
                                 CodLeitor = txtCodLeitor.Text,
                                 NomeLeitor = txtNomeLeitor.Text
                             });
+
+                            dao.AtualizaItemAcervo(new ItemAcervoModel()
+                            {
+                                StatusItem = cbxStatusItem.Text,
+                                CodItem = txtCodItem.Text
+                            });
                             MessageBox.Show("Reserva salva com sucesso!");
                             limparForm();
                         
@@ -200,11 +206,6 @@ namespace ReservaItemAcervo
                 {
                     CodItem = txtCodItem.Text
                 });
-
-                cbxStatusItem.Text = dao.GetStatusItem(new ItemAcervoModel()
-                {
-                    CodItem = txtCodItem.Text
-                });
             }
         }
 
@@ -220,11 +221,16 @@ namespace ReservaItemAcervo
 
         private void cbxTipoMovimento_TextChanged(object sender, EventArgs e)
         {
-            /*string situacao = cbxTipoMovimento.Text;
-            if (situacao == "Reservar")
+            if (cbxTipoMovimento.Text == "Reservar")
             {
                 cbxStatusItem.SelectedIndex = 1;
-            }*/
+            } else if (cbxTipoMovimento.Text == "Empréstimo")
+            {
+                cbxStatusItem.SelectedIndex = 2;
+            } else
+            {
+                cbxStatusItem.SelectedIndex = 0;
+            }
         }
 
         private void txtCodItem_KeyPress(object sender, KeyPressEventArgs e)
