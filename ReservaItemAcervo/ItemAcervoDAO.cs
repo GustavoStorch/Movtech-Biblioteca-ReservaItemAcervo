@@ -16,13 +16,32 @@ namespace ReservaItemAcervo
             Connection = connection;
         }
 
+        public List<ItemAcervoModel> GetItensAcervosDevolver()
+        {
+            List<ItemAcervoModel> itensAcervos = new List<ItemAcervoModel>();
+            using (SqlCommand command = Connection.CreateCommand())
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.AppendLine("SELECT codItem, nome, numExemplar, tipoItem, localizacao, statusItem FROM mvtBibItemAcervo WHERE statusItem = 'Reservado' OR statusItem = 'Emprestado' ORDER BY codItem");
+                command.CommandText = sql.ToString();
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        itensAcervos.Add(PopulateDrItemAcervo(dr));
+                    }
+                }
+            }
+            return itensAcervos;
+        }
+
         public List<ItemAcervoModel> GetItensAcervos()
         {
             List<ItemAcervoModel> itensAcervos = new List<ItemAcervoModel>();
             using (SqlCommand command = Connection.CreateCommand())
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT codItem, nome, numExemplar, tipoItem, localizacao, statusItem FROM mvtBibItemAcervo ORDER BY codItem");
+                sql.AppendLine("SELECT codItem, nome, numExemplar, tipoItem, localizacao, statusItem FROM mvtBibItemAcervo WHERE statusItem = 'Disponível' ORDER BY codItem");
                 command.CommandText = sql.ToString();
                 using (SqlDataReader dr = command.ExecuteReader())
                 {

@@ -57,7 +57,6 @@
             this.btnBuscarItem = new System.Windows.Forms.Button();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.dtgDadosReserva = new System.Windows.Forms.DataGridView();
-            this.btnLimpar = new System.Windows.Forms.Button();
             this.colCoditem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNomeItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatusItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,6 +69,7 @@
             this.colCodLeitor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEncerrar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTipoMovimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnLimpar = new System.Windows.Forms.Button();
             this.gpbDadosReserva.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgDadosReserva)).BeginInit();
             this.SuspendLayout();
@@ -178,13 +178,13 @@
             this.cbxTipoMovimento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTipoMovimento.FormattingEnabled = true;
             this.cbxTipoMovimento.Items.AddRange(new object[] {
-            "Reservar",
+            "Devolver",
             "Empréstimo",
-            "Devolver"});
+            "Reservar"});
             this.cbxTipoMovimento.Location = new System.Drawing.Point(152, 32);
             this.cbxTipoMovimento.Name = "cbxTipoMovimento";
             this.cbxTipoMovimento.Size = new System.Drawing.Size(182, 28);
-            this.cbxTipoMovimento.TabIndex = 11;
+            this.cbxTipoMovimento.TabIndex = 1;
             this.cbxTipoMovimento.TextChanged += new System.EventHandler(this.cbxTipoMovimento_TextChanged);
             // 
             // txtCodItem
@@ -194,7 +194,7 @@
             this.txtCodItem.MaxLength = 5;
             this.txtCodItem.Name = "txtCodItem";
             this.txtCodItem.Size = new System.Drawing.Size(123, 26);
-            this.txtCodItem.TabIndex = 12;
+            this.txtCodItem.TabIndex = 2;
             this.txtCodItem.TextChanged += new System.EventHandler(this.txtCodItem_TextChanged);
             this.txtCodItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodItem_KeyPress);
             // 
@@ -208,7 +208,7 @@
             this.txtNomeItem.Name = "txtNomeItem";
             this.txtNomeItem.ReadOnly = true;
             this.txtNomeItem.Size = new System.Drawing.Size(516, 26);
-            this.txtNomeItem.TabIndex = 13;
+            this.txtNomeItem.TabIndex = 4;
             // 
             // txtNumExemplar
             // 
@@ -218,7 +218,7 @@
             this.txtNumExemplar.Name = "txtNumExemplar";
             this.txtNumExemplar.ReadOnly = true;
             this.txtNumExemplar.Size = new System.Drawing.Size(184, 26);
-            this.txtNumExemplar.TabIndex = 14;
+            this.txtNumExemplar.TabIndex = 5;
             // 
             // txtTipoItem
             // 
@@ -228,7 +228,7 @@
             this.txtTipoItem.Name = "txtTipoItem";
             this.txtTipoItem.ReadOnly = true;
             this.txtTipoItem.Size = new System.Drawing.Size(184, 26);
-            this.txtTipoItem.TabIndex = 15;
+            this.txtTipoItem.TabIndex = 6;
             // 
             // txtLocalizacao
             // 
@@ -240,7 +240,7 @@
             this.txtLocalizacao.Name = "txtLocalizacao";
             this.txtLocalizacao.ReadOnly = true;
             this.txtLocalizacao.Size = new System.Drawing.Size(516, 26);
-            this.txtLocalizacao.TabIndex = 16;
+            this.txtLocalizacao.TabIndex = 7;
             // 
             // txtCodLeitor
             // 
@@ -249,7 +249,7 @@
             this.txtCodLeitor.MaxLength = 3;
             this.txtCodLeitor.Name = "txtCodLeitor";
             this.txtCodLeitor.Size = new System.Drawing.Size(123, 26);
-            this.txtCodLeitor.TabIndex = 17;
+            this.txtCodLeitor.TabIndex = 8;
             this.txtCodLeitor.TextChanged += new System.EventHandler(this.txtCodLeitor_TextChanged);
             this.txtCodLeitor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodLeitor_KeyPress);
             // 
@@ -263,13 +263,14 @@
             this.txtNomeLeitor.Name = "txtNomeLeitor";
             this.txtNomeLeitor.ReadOnly = true;
             this.txtNomeLeitor.Size = new System.Drawing.Size(826, 26);
-            this.txtNomeLeitor.TabIndex = 18;
+            this.txtNomeLeitor.TabIndex = 10;
             // 
             // cbxStatusItem
             // 
             this.cbxStatusItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbxStatusItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxStatusItem.Enabled = false;
             this.cbxStatusItem.FormattingEnabled = true;
             this.cbxStatusItem.Items.AddRange(new object[] {
             "Disponível",
@@ -278,21 +279,23 @@
             this.cbxStatusItem.Location = new System.Drawing.Point(1032, 155);
             this.cbxStatusItem.Name = "cbxStatusItem";
             this.cbxStatusItem.Size = new System.Drawing.Size(260, 28);
-            this.cbxStatusItem.TabIndex = 19;
+            this.cbxStatusItem.TabIndex = 13;
             // 
             // dtpDataReserva
             // 
             this.dtpDataReserva.Location = new System.Drawing.Point(152, 158);
+            this.dtpDataReserva.MinDate = new System.DateTime(2023, 5, 25, 0, 0, 0, 0);
             this.dtpDataReserva.Name = "dtpDataReserva";
             this.dtpDataReserva.Size = new System.Drawing.Size(318, 26);
-            this.dtpDataReserva.TabIndex = 20;
+            this.dtpDataReserva.TabIndex = 11;
             // 
             // dtpDataDevolucao
             // 
             this.dtpDataDevolucao.Location = new System.Drawing.Point(636, 158);
+            this.dtpDataDevolucao.MinDate = new System.DateTime(2023, 5, 25, 0, 0, 0, 0);
             this.dtpDataDevolucao.Name = "dtpDataDevolucao";
             this.dtpDataDevolucao.Size = new System.Drawing.Size(324, 26);
-            this.dtpDataDevolucao.TabIndex = 21;
+            this.dtpDataDevolucao.TabIndex = 12;
             // 
             // gpbDadosReserva
             // 
@@ -338,7 +341,7 @@
             this.btnBuscarLeitor.Location = new System.Drawing.Point(276, 118);
             this.btnBuscarLeitor.Name = "btnBuscarLeitor";
             this.btnBuscarLeitor.Size = new System.Drawing.Size(58, 26);
-            this.btnBuscarLeitor.TabIndex = 27;
+            this.btnBuscarLeitor.TabIndex = 9;
             this.btnBuscarLeitor.UseVisualStyleBackColor = true;
             this.btnBuscarLeitor.Click += new System.EventHandler(this.btnBuscarLeitor_Click);
             // 
@@ -351,7 +354,7 @@
             this.btnBuscarItem.Location = new System.Drawing.Point(592, 32);
             this.btnBuscarItem.Name = "btnBuscarItem";
             this.btnBuscarItem.Size = new System.Drawing.Size(58, 28);
-            this.btnBuscarItem.TabIndex = 26;
+            this.btnBuscarItem.TabIndex = 3;
             this.btnBuscarItem.UseVisualStyleBackColor = true;
             this.btnBuscarItem.Click += new System.EventHandler(this.btnBuscarItem_Click);
             // 
@@ -362,7 +365,7 @@
             this.btnSalvar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(116, 34);
-            this.btnSalvar.TabIndex = 24;
+            this.btnSalvar.TabIndex = 15;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
@@ -397,20 +400,8 @@
             this.dtgDadosReserva.RowTemplate.Height = 28;
             this.dtgDadosReserva.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtgDadosReserva.Size = new System.Drawing.Size(1302, 445);
-            this.dtgDadosReserva.TabIndex = 25;
+            this.dtgDadosReserva.TabIndex = 16;
             this.dtgDadosReserva.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgDadosReserva_CellDoubleClick);
-            // 
-            // btnLimpar
-            // 
-            this.btnLimpar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLimpar.Location = new System.Drawing.Point(1074, 226);
-            this.btnLimpar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnLimpar.Name = "btnLimpar";
-            this.btnLimpar.Size = new System.Drawing.Size(116, 34);
-            this.btnLimpar.TabIndex = 26;
-            this.btnLimpar.Text = "Limpar";
-            this.btnLimpar.UseVisualStyleBackColor = true;
-            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // colCoditem
             // 
@@ -508,6 +499,18 @@
             this.colTipoMovimento.Name = "colTipoMovimento";
             this.colTipoMovimento.ReadOnly = true;
             this.colTipoMovimento.Visible = false;
+            // 
+            // btnLimpar
+            // 
+            this.btnLimpar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLimpar.Location = new System.Drawing.Point(1074, 226);
+            this.btnLimpar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Size = new System.Drawing.Size(116, 34);
+            this.btnLimpar.TabIndex = 14;
+            this.btnLimpar.Text = "Limpar";
+            this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // FormReservaItemAcervo
             // 

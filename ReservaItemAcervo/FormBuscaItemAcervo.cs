@@ -16,6 +16,8 @@ namespace ReservaItemAcervo
     {
         public string codItem { get; private set; }
 
+        public string devolucao { get; set; }
+
         public FormBuscaItemAcervo()
         {
             InitializeComponent();
@@ -35,18 +37,36 @@ namespace ReservaItemAcervo
         private void InitializeTable()
         {
             dtgDadosItemAcervo.Rows.Clear();
-            using (SqlConnection connection = DaoConnection.GetConexao())
+
+            if(devolucao == "Devolver")
             {
-                ItemAcervoDAO dao = new ItemAcervoDAO(connection);
-                List<ItemAcervoModel> itensAcervos = dao.GetItensAcervos();
-                foreach (ItemAcervoModel itemAcervo in itensAcervos)
+                using (SqlConnection connection = DaoConnection.GetConexao())
                 {
-                    DataGridViewRow row = dtgDadosItemAcervo.Rows[dtgDadosItemAcervo.Rows.Add()];
-                    row.Cells[colCodItemAcervo.Index].Value = itemAcervo.CodItem;
-                    row.Cells[colNomeItemAcervo.Index].Value = itemAcervo.NomeItem;
-                    row.Cells[colNumExemplar.Index].Value = itemAcervo.NumExemplar;
+                    ItemAcervoDAO dao = new ItemAcervoDAO(connection);
+                    List<ItemAcervoModel> itensAcervos = dao.GetItensAcervosDevolver();
+                    foreach (ItemAcervoModel itemAcervo in itensAcervos)
+                    {
+                        DataGridViewRow row = dtgDadosItemAcervo.Rows[dtgDadosItemAcervo.Rows.Add()];
+                        row.Cells[colCodItemAcervo.Index].Value = itemAcervo.CodItem;
+                        row.Cells[colNomeItemAcervo.Index].Value = itemAcervo.NomeItem;
+                        row.Cells[colNumExemplar.Index].Value = itemAcervo.NumExemplar;
+                    }
                 }
-            }
+            } else
+            {
+                using (SqlConnection connection = DaoConnection.GetConexao())
+                {
+                    ItemAcervoDAO dao = new ItemAcervoDAO(connection);
+                    List<ItemAcervoModel> itensAcervos = dao.GetItensAcervos();
+                    foreach (ItemAcervoModel itemAcervo in itensAcervos)
+                    {
+                        DataGridViewRow row = dtgDadosItemAcervo.Rows[dtgDadosItemAcervo.Rows.Add()];
+                        row.Cells[colCodItemAcervo.Index].Value = itemAcervo.CodItem;
+                        row.Cells[colNomeItemAcervo.Index].Value = itemAcervo.NomeItem;
+                        row.Cells[colNumExemplar.Index].Value = itemAcervo.NumExemplar;
+                    }
+                }
+            }        
         }
 
         private void dtgDadosItemAcervo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -66,11 +86,7 @@ namespace ReservaItemAcervo
             foreach (DataGridViewRow row in dtgDadosItemAcervo.Rows)
             {
                 string nomeAutor = row.Cells[colNomeItemAcervo.Index].Value.ToString().Trim();
-
-                // Verifica se o nome do autor contém o filtro
                 bool exibir = nomeAutor.IndexOf(filtro, StringComparison.OrdinalIgnoreCase) >= 0;
-
-                // Define a visibilidade da linha com base no resultado do filtro
                 row.Visible = exibir;
             }
         }

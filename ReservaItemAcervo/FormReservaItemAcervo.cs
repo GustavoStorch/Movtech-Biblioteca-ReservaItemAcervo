@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,9 +30,10 @@ namespace ReservaItemAcervo
         public void CarregaFormBuscaItemAcervo()
         {
             FormBuscaItemAcervo formBuscaItemAcervo = new FormBuscaItemAcervo();
+            formBuscaItemAcervo.devolucao = cbxTipoMovimento.Text;
             formBuscaItemAcervo.ShowDialog();
-
             txtCodItem.Text = formBuscaItemAcervo.codItem;
+            
         }
 
         public void CarregaFormBuscaLeitor()
@@ -50,7 +52,6 @@ namespace ReservaItemAcervo
                 {
                     ReservaDAO dao = new ReservaDAO(connection);
 
-                    //Verifica se os campos estão preenchidos corretamente
                     bool verificaCampos = dao.VerificaCampos(new ReservaModel()
                     {
                         DataReserva = dtpDataReserva.Value.Date.ToString(),
@@ -70,14 +71,17 @@ namespace ReservaItemAcervo
 
                     if (verificaCampos)
                     {
+                        string movimento = cbxTipoMovimento.Text;
                         bool verificaEmprestimo = dao.VerificaEmprestimo(new ItemAcervoModel()
                         {
                             CodItem = txtCodItem.Text
+                        }, new ReservaModel()
+                        {
+                            TipoMovimento = movimento
                         });
 
                         if (verificaEmprestimo)
                         {
-
                             dao.Salvar(new ReservaModel()
                             {
                                 DataReserva = dtpDataReserva.Value.Date.ToString(),
@@ -102,13 +106,24 @@ namespace ReservaItemAcervo
                                 StatusItem = cbxStatusItem.Text,
                                 CodItem = txtCodItem.Text
                             });
-                            MessageBox.Show("Reserva salva com sucesso!");
+
+                            if (movimento == "Devolver")
+                            {
+                                MessageBox.Show("Item do acervo Devolvido!");
+                            }
+                            else if (movimento == "Empréstimo")
+                            {
+                                MessageBox.Show("Empréstimo realizado com sucesso!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Reserva realizada com sucesso!");
+                            }
                             limparForm();
                         }
                     }
-                    InitializeTable();
-                    btnLimpar.Enabled = false;
                 }
+                InitializeTable();  
             }
             catch (Exception ex)
             {
@@ -172,8 +187,16 @@ namespace ReservaItemAcervo
                 dtpDataReserva.Text = dtgDadosReserva.Rows[e.RowIndex].Cells[colDataReserva.Index].Value + "";
                 dtpDataDevolucao.Text = dtgDadosReserva.Rows[e.RowIndex].Cells[colDataRetorno.Index].Value + "";
                 cbxTipoMovimento.Text = dtgDadosReserva.Rows[e.RowIndex].Cells[colTipoMovimento.Index].Value + "";
-            }                
+            }
             btnLimpar.Enabled = true;
+            btnSalvar.Enabled = false;
+            cbxTipoMovimento.Enabled = false;
+            dtpDataReserva.Enabled = false;
+            dtpDataDevolucao.Enabled = false;
+            txtCodItem.ReadOnly = true;
+            txtCodLeitor.ReadOnly = true;
+            btnBuscarItem.Enabled = false;
+            btnBuscarLeitor.Enabled = false;
         }
 
         private void txtCodLeitor_TextChanged(object sender, EventArgs e)
@@ -261,6 +284,14 @@ namespace ReservaItemAcervo
         {
             limparForm();
             btnLimpar.Enabled = false;
+            btnSalvar.Enabled = true;
+            cbxTipoMovimento.Enabled = true;
+            dtpDataReserva.Enabled = true;
+            dtpDataDevolucao.Enabled = true;
+            txtCodItem.ReadOnly = false;
+            txtCodLeitor.ReadOnly = false;
+            btnBuscarItem.Enabled = true;
+            btnBuscarLeitor.Enabled = true;
         }
     }
 }
