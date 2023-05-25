@@ -140,6 +140,42 @@ namespace ReservaItemAcervo
             return string.Empty;
         }
 
+        public string GetNomeLeitorDevolucao(ItemAcervoModel itemAcervo)
+        {
+            using (SqlCommand command = Connection.CreateCommand())
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.AppendLine($"SELECT nomeLeitor FROM mvtBibReserva WHERE statusItem = 'Reservado' OR statusItem = 'Emprestado' AND codItem = @codItem");
+                command.CommandText = sql.ToString();
+                command.Parameters.AddWithValue("@codItem", itemAcervo.CodItem);
+                string result = Convert.ToString(command.ExecuteScalar());
+
+                if (result != null)
+                {
+                    return result.ToString();
+                }
+            }
+            return string.Empty;
+        }
+
+        public string GetCodLeitorDevolucao(ItemAcervoModel itemAcervo)
+        {
+            using (SqlCommand command = Connection.CreateCommand())
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.AppendLine($"SELECT codLeitor FROM mvtBibReserva WHERE statusItem = 'Reservado' OR statusItem = 'Emprestado' AND codItem = @codItem");
+                command.CommandText = sql.ToString();
+                command.Parameters.AddWithValue("@codItem", itemAcervo.CodItem);
+                string result = Convert.ToString(command.ExecuteScalar());
+
+                if (result != null)
+                {
+                    return result.ToString();
+                }
+            }
+            return string.Empty;
+        }
+
         public string GetNomeItem(ItemAcervoModel itemAcervo)
         {
             using (SqlCommand command = Connection.CreateCommand())

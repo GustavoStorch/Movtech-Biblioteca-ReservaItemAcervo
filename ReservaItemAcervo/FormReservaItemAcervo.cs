@@ -123,7 +123,13 @@ namespace ReservaItemAcervo
                         }
                     }
                 }
-                InitializeTable();  
+                InitializeTable();
+                dtpDataReserva.Enabled = true;
+                dtpDataDevolucao.Enabled = true;
+                txtCodItem.ReadOnly = false;
+                txtCodLeitor.ReadOnly = false;
+                btnBuscarItem.Enabled = true;
+                btnBuscarLeitor.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -214,6 +220,8 @@ namespace ReservaItemAcervo
 
         private void txtCodItem_TextChanged(object sender, EventArgs e)
         {
+            string situacao = cbxTipoMovimento.Text;
+
             using (SqlConnection connection = DaoConnection.GetConexao())
             {
                 ReservaDAO dao = new ReservaDAO(connection);
@@ -238,6 +246,22 @@ namespace ReservaItemAcervo
                     CodItem = txtCodItem.Text
                 });
             }
+            if (situacao == "Devolver")
+            {
+                using (SqlConnection connection = DaoConnection.GetConexao())
+                {
+                    ReservaDAO dao = new ReservaDAO(connection);
+
+                    txtNomeLeitor.Text = dao.GetNomeLeitorDevolucao(new ItemAcervoModel()
+                    {
+                        CodItem = txtCodItem.Text
+                    });
+                    txtCodLeitor.Text = dao.GetCodLeitorDevolucao(new ItemAcervoModel()
+                    {
+                        CodItem = txtCodItem.Text
+                    });
+                }
+            }
         }
 
         private void btnBuscarItem_Click(object sender, EventArgs e)
@@ -261,6 +285,10 @@ namespace ReservaItemAcervo
             } else
             {
                 cbxStatusItem.SelectedIndex = 0;
+                txtCodItem.ReadOnly = true;
+                txtCodLeitor.ReadOnly = true;
+                dtpDataReserva.Enabled = false;
+                dtpDataDevolucao.Enabled = false;
             }
         }
 
