@@ -262,6 +262,8 @@ namespace ReservaItemAcervo
                     });
                 }
             }
+
+            
         }
 
         private void btnBuscarItem_Click(object sender, EventArgs e)
@@ -279,9 +281,17 @@ namespace ReservaItemAcervo
             if (cbxTipoMovimento.Text == "Reservar")
             {
                 cbxStatusItem.SelectedIndex = 1;
+                dtpDataReserva.Enabled = true;
+                dtpDataDevolucao.Enabled = true;
+                txtCodItem.ReadOnly = false;
+                txtCodLeitor.ReadOnly = false;
             } else if (cbxTipoMovimento.Text == "Empréstimo")
             {
                 cbxStatusItem.SelectedIndex = 2;
+                dtpDataReserva.Enabled = true;
+                dtpDataDevolucao.Enabled = true;
+                txtCodItem.ReadOnly = false;
+                txtCodLeitor.ReadOnly = false;
             } else
             {
                 cbxStatusItem.SelectedIndex = 0;

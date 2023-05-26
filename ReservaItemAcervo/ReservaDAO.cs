@@ -41,7 +41,6 @@ namespace ReservaItemAcervo
                     command.Parameters.Add(new SqlParameter("@nomeLeitor", leitor.NomeLeitor));
                     command.Parameters.Add(new SqlParameter("@dataReserva", reserva.DataReserva));
                     command.Parameters.Add(new SqlParameter("@prazoReserva", reserva.PrazoReserva));
-                    //command.Parameters.Add(new SqlParameter("@encerrar", reserva.Encerrar));
                     command.Parameters.Add(new SqlParameter("@tipoMovimento", reserva.TipoMovimento));
 
                     command.Transaction = t;
@@ -106,7 +105,7 @@ namespace ReservaItemAcervo
                     throw ex;
                 }
             }
-        }*/
+        }
 
         public int VerificaRegistros(ItemAcervoModel itemAcervo, LeitorModel leitor)
         {
@@ -120,7 +119,7 @@ namespace ReservaItemAcervo
                 int count = Convert.ToInt32(command.ExecuteScalar());
                 return count;
             }
-        }
+        }*/
 
         public string GetNomeLeitor(LeitorModel leitor)
         {
