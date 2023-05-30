@@ -356,7 +356,7 @@ namespace ReservaItemAcervo
             {
                 StringBuilder sql = new StringBuilder();
                 sql.AppendLine("SELECT codItem, statusItem, nomeItem, numExemplar, tipoItem, localizacao, codLeitor, ");
-                sql.AppendLine("nomeLeitor, dataReserva, prazoReserva, encerrar, tipoMovimento FROM mvtBibReserva ORDER BY codItem");
+                sql.AppendLine("nomeLeitor, dataReserva, prazoReserva, tipoMovimento FROM mvtBibReserva ORDER BY codItem");
                 command.CommandText = sql.ToString();
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
@@ -373,7 +373,7 @@ namespace ReservaItemAcervo
         {
             string dataReserva = "";
             string prazoReserva = "";
-            string encerrar = "";
+            //string encerrar = "";
             string tipoMovimento = "";
             LeitorModel leitor = null;
             ItemAcervoModel itemAcervo = null;
@@ -386,10 +386,10 @@ namespace ReservaItemAcervo
             {
                 prazoReserva = dr["prazoReserva"] + "";
             }
-            if (DBNull.Value != dr["encerrar"])
+            /*if (DBNull.Value != dr["encerrar"])
             {
                 encerrar = dr["encerrar"] + "";
-            }
+            }*/
             if (DBNull.Value != dr["tipoMovimento"])
             {
                 tipoMovimento = dr["tipoMovimento"] + "";
@@ -427,7 +427,7 @@ namespace ReservaItemAcervo
             {
                 DataReserva = dataReserva,
                 PrazoReserva = prazoReserva,
-                Encerrar = encerrar,
+                //Encerrar = encerrar,
                 TipoMovimento = tipoMovimento,
                 LeitorModel = leitor,
                 ItemAcervoModel = itemAcervo

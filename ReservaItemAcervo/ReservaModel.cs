@@ -16,7 +16,7 @@ namespace ReservaItemAcervo
 
         public string PrazoReserva { get; set; }
 
-        public string Encerrar { get; set; }
+        //public string Encerrar { get; set; }
 
         [ForeignKey("mvtBibItemAcervo")]
         [Column("codItem")]

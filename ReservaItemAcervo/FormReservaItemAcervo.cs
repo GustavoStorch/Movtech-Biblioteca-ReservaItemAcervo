@@ -172,7 +172,7 @@ namespace ReservaItemAcervo
                     row.Cells[colNomeLeitor.Index].Value = reserva.LeitorModel.NomeLeitor;
                     row.Cells[colDataReserva.Index].Value = reserva.DataReserva.Substring(0, 10);
                     row.Cells[colDataRetorno.Index].Value = reserva.PrazoReserva.Substring(0, 10);
-                    row.Cells[colEncerrar.Index].Value = reserva.Encerrar;
+                    //row.Cells[colEncerrar.Index].Value = reserva.Encerrar;
                     row.Cells[colTipoMovimento.Index].Value = reserva.TipoMovimento;
                 }
             }
@@ -202,6 +202,7 @@ namespace ReservaItemAcervo
             txtCodItem.ReadOnly = true;
             txtCodLeitor.ReadOnly = true;
             btnBuscarItem.Enabled = false;
+            btnBuscarLeitor.Enabled = false;
             btnBuscarLeitor.Enabled = false;
         }
 
@@ -299,6 +300,7 @@ namespace ReservaItemAcervo
                 txtCodLeitor.ReadOnly = true;
                 dtpDataReserva.Enabled = false;
                 dtpDataDevolucao.Enabled = false;
+                btnBuscarLeitor.Enabled = false;
             }
         }
 
