@@ -82,31 +82,60 @@ namespace ReservaItemAcervo
 
                         if (verificaEmprestimo)
                         {
-                            dao.Salvar(new ReservaModel()
+                            int count = dao.VerificaRegistros(new ItemAcervoModel()
                             {
-                                DataReserva = dtpDataReserva.Value.Date.ToString(),
-                                PrazoReserva = dtpDataDevolucao.Value.Date.ToString(),
-                                TipoMovimento = cbxTipoMovimento.Text
-                            }, new ItemAcervoModel()
-                            {
-                                CodItem = txtCodItem.Text,
-                                NomeItem = txtNomeItem.Text,
-                                NumExemplar = txtNumExemplar.Text,
-                                TipoItem = txtTipoItem.Text,
-                                Localizacao = txtLocalizacao.Text,
-                                StatusItem = cbxStatusItem.Text
+                                CodItem = txtCodItem.Text
                             }, new LeitorModel()
                             {
-                                CodLeitor = txtCodLeitor.Text,
-                                NomeLeitor = txtNomeLeitor.Text
+                                CodLeitor = txtCodLeitor.Text
                             });
 
-                            dao.AtualizaItemAcervo(new ItemAcervoModel()
+                            if (count > 0)
                             {
-                                StatusItem = cbxStatusItem.Text,
-                                CodItem = txtCodItem.Text
-                            });
+                                dao.Editar(new ReservaModel()
+                                {
+                                    TipoMovimento = cbxTipoMovimento.Text,
+                                    PrazoReserva = dtpDataDevolucao.Value.Date.ToString()
+                                }, new ItemAcervoModel()
+                                {
+                                    StatusItem = cbxStatusItem.Text,
+                                    CodItem = txtCodItem.Text
+                                }, new LeitorModel()
+                                {
+                                    CodLeitor = txtCodLeitor.Text
+                                });
+                                dao.AtualizaItemAcervo(new ItemAcervoModel()
+                                {
+                                    StatusItem = cbxStatusItem.Text,
+                                    CodItem = txtCodItem.Text
+                                });
+                            } else
+                            {
+                                dao.Salvar(new ReservaModel()
+                                {
+                                    DataReserva = dtpDataReserva.Value.Date.ToString(),
+                                    PrazoReserva = dtpDataDevolucao.Value.Date.ToString(),
+                                    TipoMovimento = cbxTipoMovimento.Text
+                                }, new ItemAcervoModel()
+                                {
+                                    CodItem = txtCodItem.Text,
+                                    NomeItem = txtNomeItem.Text,
+                                    NumExemplar = txtNumExemplar.Text,
+                                    TipoItem = txtTipoItem.Text,
+                                    Localizacao = txtLocalizacao.Text,
+                                    StatusItem = cbxStatusItem.Text
+                                }, new LeitorModel()
+                                {
+                                    CodLeitor = txtCodLeitor.Text,
+                                    NomeLeitor = txtNomeLeitor.Text
+                                });
 
+                                dao.AtualizaItemAcervo(new ItemAcervoModel()
+                                {
+                                    StatusItem = cbxStatusItem.Text,
+                                    CodItem = txtCodItem.Text
+                                });
+                            }
                             if (movimento == "Devolver")
                             {
                                 MessageBox.Show("Item do acervo Devolvido!");
