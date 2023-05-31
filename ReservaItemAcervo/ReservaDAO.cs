@@ -79,48 +79,6 @@ namespace ReservaItemAcervo
             }
         }
 
-        /*public void Editar(ReservaModel reserva, ItemAcervoModel itemAcervo, LeitorModel leitor)
-        {
-            using (SqlCommand command = Connection.CreateCommand())
-            {
-                SqlTransaction t = Connection.BeginTransaction();
-                try
-                {
-                    StringBuilder sql = new StringBuilder();
-                    sql.AppendLine($"UPDATE mvtBibReserva SET statusItem = @statusItem, tipoMovimento = @tipoMovimento, prazoReserva = @prazoReserva" +
-                        $" WHERE codItem = @codItem AND codLeitor = @codLeitor");
-                    command.CommandText = sql.ToString();
-                    command.Parameters.Add(new SqlParameter("@statusItem", itemAcervo.StatusItem));
-                    command.Parameters.Add(new SqlParameter("@tipoMovimento", reserva.TipoMovimento));
-                    command.Parameters.Add(new SqlParameter("@prazoReserva", reserva.PrazoReserva));
-                    command.Parameters.Add(new SqlParameter("@codItem", itemAcervo.CodItem));
-                    command.Parameters.Add(new SqlParameter("@codLeitor", leitor.CodLeitor));               
-                    command.Transaction = t;
-                    command.ExecuteNonQuery();
-                    t.Commit();
-                }
-                catch (Exception ex)
-                {
-                    t.Rollback();
-                    throw ex;
-                }
-            }
-        }
-
-        public int VerificaRegistros(ItemAcervoModel itemAcervo, LeitorModel leitor)
-        {
-            using (SqlCommand command = Connection.CreateCommand())
-            {
-                StringBuilder sql = new StringBuilder();
-                sql.AppendLine($"SELECT COUNT(codItem) FROM mvtBibReserva WHERE codItem = @codItem AND codLeitor = @codLeitor");
-                command.CommandText = sql.ToString();
-                command.Parameters.AddWithValue("@codItem", itemAcervo.CodItem);
-                command.Parameters.AddWithValue("@codLeitor", leitor.CodLeitor);
-                int count = Convert.ToInt32(command.ExecuteScalar());
-                return count;
-            }
-        }*/
-
         public string GetNomeLeitor(LeitorModel leitor)
         {
             using (SqlCommand command = Connection.CreateCommand())
@@ -373,7 +331,6 @@ namespace ReservaItemAcervo
         {
             string dataReserva = "";
             string prazoReserva = "";
-            //string encerrar = "";
             string tipoMovimento = "";
             LeitorModel leitor = null;
             ItemAcervoModel itemAcervo = null;
@@ -386,10 +343,6 @@ namespace ReservaItemAcervo
             {
                 prazoReserva = dr["prazoReserva"] + "";
             }
-            /*if (DBNull.Value != dr["encerrar"])
-            {
-                encerrar = dr["encerrar"] + "";
-            }*/
             if (DBNull.Value != dr["tipoMovimento"])
             {
                 tipoMovimento = dr["tipoMovimento"] + "";
@@ -427,7 +380,6 @@ namespace ReservaItemAcervo
             {
                 DataReserva = dataReserva,
                 PrazoReserva = prazoReserva,
-                //Encerrar = encerrar,
                 TipoMovimento = tipoMovimento,
                 LeitorModel = leitor,
                 ItemAcervoModel = itemAcervo

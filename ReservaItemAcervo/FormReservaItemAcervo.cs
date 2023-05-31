@@ -172,7 +172,6 @@ namespace ReservaItemAcervo
                     row.Cells[colNomeLeitor.Index].Value = reserva.LeitorModel.NomeLeitor;
                     row.Cells[colDataReserva.Index].Value = reserva.DataReserva.Substring(0, 10);
                     row.Cells[colDataRetorno.Index].Value = reserva.PrazoReserva.Substring(0, 10);
-                    //row.Cells[colEncerrar.Index].Value = reserva.Encerrar;
                     row.Cells[colTipoMovimento.Index].Value = reserva.TipoMovimento;
                 }
             }
@@ -263,8 +262,6 @@ namespace ReservaItemAcervo
                     });
                 }
             }
-
-            
         }
 
         private void btnBuscarItem_Click(object sender, EventArgs e)
@@ -286,6 +283,7 @@ namespace ReservaItemAcervo
                 dtpDataDevolucao.Enabled = true;
                 txtCodItem.ReadOnly = false;
                 txtCodLeitor.ReadOnly = false;
+                btnBuscarLeitor.Enabled = true;
             } else if (cbxTipoMovimento.Text == "Empréstimo")
             {
                 cbxStatusItem.SelectedIndex = 2;
@@ -293,13 +291,13 @@ namespace ReservaItemAcervo
                 dtpDataDevolucao.Enabled = true;
                 txtCodItem.ReadOnly = false;
                 txtCodLeitor.ReadOnly = false;
+                btnBuscarLeitor.Enabled = true;
             } else
             {
                 cbxStatusItem.SelectedIndex = 0;
                 txtCodItem.ReadOnly = true;
                 txtCodLeitor.ReadOnly = true;
                 dtpDataReserva.Enabled = false;
-                dtpDataDevolucao.Enabled = false;
                 btnBuscarLeitor.Enabled = false;
             }
         }
