@@ -158,7 +158,7 @@
             // lblPrazoDevolucao
             // 
             this.lblPrazoDevolucao.AutoSize = true;
-            this.lblPrazoDevolucao.Location = new System.Drawing.Point(476, 165);
+            this.lblPrazoDevolucao.Location = new System.Drawing.Point(340, 165);
             this.lblPrazoDevolucao.Name = "lblPrazoDevolucao";
             this.lblPrazoDevolucao.Size = new System.Drawing.Size(155, 20);
             this.lblPrazoDevolucao.TabIndex = 9;
@@ -166,8 +166,9 @@
             // 
             // lblStatusItem
             // 
+            this.lblStatusItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblStatusItem.AutoSize = true;
-            this.lblStatusItem.Location = new System.Drawing.Point(966, 165);
+            this.lblStatusItem.Location = new System.Drawing.Point(968, 121);
             this.lblStatusItem.Name = "lblStatusItem";
             this.lblStatusItem.Size = new System.Drawing.Size(60, 20);
             this.lblStatusItem.TabIndex = 10;
@@ -262,13 +263,12 @@
             this.txtNomeLeitor.MaxLength = 50;
             this.txtNomeLeitor.Name = "txtNomeLeitor";
             this.txtNomeLeitor.ReadOnly = true;
-            this.txtNomeLeitor.Size = new System.Drawing.Size(826, 26);
+            this.txtNomeLeitor.Size = new System.Drawing.Size(496, 26);
             this.txtNomeLeitor.TabIndex = 10;
             // 
             // cbxStatusItem
             // 
-            this.cbxStatusItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxStatusItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbxStatusItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxStatusItem.Enabled = false;
             this.cbxStatusItem.FormattingEnabled = true;
@@ -276,25 +276,27 @@
             "Disponível",
             "Reservado",
             "Emprestado"});
-            this.cbxStatusItem.Location = new System.Drawing.Point(1032, 155);
+            this.cbxStatusItem.Location = new System.Drawing.Point(1032, 118);
             this.cbxStatusItem.Name = "cbxStatusItem";
             this.cbxStatusItem.Size = new System.Drawing.Size(260, 28);
             this.cbxStatusItem.TabIndex = 13;
             // 
             // dtpDataReserva
             // 
-            this.dtpDataReserva.Location = new System.Drawing.Point(152, 158);
+            this.dtpDataReserva.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataReserva.Location = new System.Drawing.Point(152, 160);
             this.dtpDataReserva.MinDate = new System.DateTime(2023, 5, 25, 0, 0, 0, 0);
             this.dtpDataReserva.Name = "dtpDataReserva";
-            this.dtpDataReserva.Size = new System.Drawing.Size(318, 26);
+            this.dtpDataReserva.Size = new System.Drawing.Size(141, 26);
             this.dtpDataReserva.TabIndex = 11;
             // 
             // dtpDataDevolucao
             // 
-            this.dtpDataDevolucao.Location = new System.Drawing.Point(636, 158);
+            this.dtpDataDevolucao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataDevolucao.Location = new System.Drawing.Point(507, 160);
             this.dtpDataDevolucao.MinDate = new System.DateTime(2023, 5, 25, 0, 0, 0, 0);
             this.dtpDataDevolucao.Name = "dtpDataDevolucao";
-            this.dtpDataDevolucao.Size = new System.Drawing.Size(324, 26);
+            this.dtpDataDevolucao.Size = new System.Drawing.Size(141, 26);
             this.dtpDataDevolucao.TabIndex = 12;
             // 
             // gpbDadosReserva
@@ -305,10 +307,10 @@
             this.gpbDadosReserva.Controls.Add(this.btnBuscarItem);
             this.gpbDadosReserva.Controls.Add(this.lblTipoMovimento);
             this.gpbDadosReserva.Controls.Add(this.cbxStatusItem);
+            this.gpbDadosReserva.Controls.Add(this.dtpDataReserva);
             this.gpbDadosReserva.Controls.Add(this.dtpDataDevolucao);
             this.gpbDadosReserva.Controls.Add(this.lblStatusItem);
             this.gpbDadosReserva.Controls.Add(this.cbxTipoMovimento);
-            this.gpbDadosReserva.Controls.Add(this.dtpDataReserva);
             this.gpbDadosReserva.Controls.Add(this.lblCodItem);
             this.gpbDadosReserva.Controls.Add(this.lblPrazoDevolucao);
             this.gpbDadosReserva.Controls.Add(this.txtCodItem);
