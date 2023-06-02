@@ -104,11 +104,22 @@ namespace ReservaItemAcervo
                                 {
                                     CodLeitor = txtCodLeitor.Text
                                 });
-                                dao.AtualizaItemAcervo(new ItemAcervoModel()
+                                if (movimento == "Devolver")
                                 {
-                                    StatusItem = cbxStatusItem.Text,
-                                    CodItem = txtCodItem.Text
-                                });
+                                    dao.AtualizaItemAcervo(new ItemAcervoModel()
+                                    {
+                                        StatusItem = "Disponível",
+                                        CodItem = txtCodItem.Text
+                                    });
+                                }
+                                else
+                                {
+                                    dao.AtualizaItemAcervo(new ItemAcervoModel()
+                                    {
+                                        StatusItem = "Emprestado",
+                                        CodItem = txtCodItem.Text
+                                    });
+                                }
                             } else
                             {
                                 dao.Salvar(new ReservaModel()
@@ -130,11 +141,21 @@ namespace ReservaItemAcervo
                                     NomeLeitor = txtNomeLeitor.Text
                                 });
 
-                                dao.AtualizaItemAcervo(new ItemAcervoModel()
+                                if(movimento == "Devolver")
                                 {
-                                    StatusItem = cbxStatusItem.Text,
-                                    CodItem = txtCodItem.Text
-                                });
+                                    dao.AtualizaItemAcervo(new ItemAcervoModel()
+                                    {
+                                        StatusItem = "Disponível",
+                                        CodItem = txtCodItem.Text
+                                    });
+                                } else
+                                {
+                                    dao.AtualizaItemAcervo(new ItemAcervoModel()
+                                    {
+                                        StatusItem = "Emprestado",
+                                        CodItem = txtCodItem.Text
+                                    });
+                                }
                             }
                             if (movimento == "Devolver")
                             {
@@ -305,17 +326,9 @@ namespace ReservaItemAcervo
 
         private void cbxTipoMovimento_TextChanged(object sender, EventArgs e)
         {
-            if (cbxTipoMovimento.Text == "Reservar")
+            if (cbxTipoMovimento.Text == "Empréstimo")
             {
                 cbxStatusItem.SelectedIndex = 1;
-                dtpDataReserva.Enabled = true;
-                dtpDataDevolucao.Enabled = true;
-                txtCodItem.ReadOnly = false;
-                txtCodLeitor.ReadOnly = false;
-                btnBuscarLeitor.Enabled = true;
-            } else if (cbxTipoMovimento.Text == "Empréstimo")
-            {
-                cbxStatusItem.SelectedIndex = 2;
                 dtpDataReserva.Enabled = true;
                 dtpDataDevolucao.Enabled = true;
                 txtCodItem.ReadOnly = false;

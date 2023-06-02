@@ -79,9 +79,9 @@
             this.lblTipoMovimento.AutoSize = true;
             this.lblTipoMovimento.Location = new System.Drawing.Point(6, 35);
             this.lblTipoMovimento.Name = "lblTipoMovimento";
-            this.lblTipoMovimento.Size = new System.Drawing.Size(124, 20);
+            this.lblTipoMovimento.Size = new System.Drawing.Size(174, 30);
             this.lblTipoMovimento.TabIndex = 0;
-            this.lblTipoMovimento.Text = "Tipo Movimento:";
+            this.lblTipoMovimento.Text = "Movimentação:";
             // 
             // lblCodItem
             // 
@@ -180,8 +180,7 @@
             this.cbxTipoMovimento.FormattingEnabled = true;
             this.cbxTipoMovimento.Items.AddRange(new object[] {
             "Devolver",
-            "Empréstimo",
-            "Reservar"});
+            "Empréstimo"});
             this.cbxTipoMovimento.Location = new System.Drawing.Point(152, 32);
             this.cbxTipoMovimento.Name = "cbxTipoMovimento";
             this.cbxTipoMovimento.Size = new System.Drawing.Size(182, 28);
@@ -273,8 +272,7 @@
             this.cbxStatusItem.Enabled = false;
             this.cbxStatusItem.FormattingEnabled = true;
             this.cbxStatusItem.Items.AddRange(new object[] {
-            "Disponível",
-            "Reservado",
+            "Devolvido",
             "Emprestado"});
             this.cbxStatusItem.Location = new System.Drawing.Point(1032, 118);
             this.cbxStatusItem.Name = "cbxStatusItem";
