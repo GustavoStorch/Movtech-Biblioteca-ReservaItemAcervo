@@ -144,7 +144,7 @@ namespace ReservaItemAcervo
             using (SqlCommand command = Connection.CreateCommand())
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine($"SELECT nomeLeitor FROM mvtBibReserva WHERE statusItem = 'Reservado' OR statusItem = 'Emprestado' AND codItem = @codItem");
+                sql.AppendLine($"SELECT nomeLeitor FROM mvtBibReserva WHERE statusItem = 'Emprestado' AND codItem = @codItem");
                 command.CommandText = sql.ToString();
                 command.Parameters.AddWithValue("@codItem", itemAcervo.CodItem);
                 string result = Convert.ToString(command.ExecuteScalar());
@@ -162,7 +162,7 @@ namespace ReservaItemAcervo
             using (SqlCommand command = Connection.CreateCommand())
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine($"SELECT codLeitor FROM mvtBibReserva WHERE statusItem = 'Reservado' OR statusItem = 'Emprestado' AND codItem = @codItem");
+                sql.AppendLine($"SELECT codLeitor FROM mvtBibReserva WHERE statusItem = 'Emprestado' AND codItem = @codItem");
                 command.CommandText = sql.ToString();
                 command.Parameters.AddWithValue("@codItem", itemAcervo.CodItem);
                 string result = Convert.ToString(command.ExecuteScalar());

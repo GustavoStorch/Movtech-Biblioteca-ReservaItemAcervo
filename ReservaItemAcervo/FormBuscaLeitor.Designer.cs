@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBuscaLeitor));
             this.dtgDadosLeitor = new System.Windows.Forms.DataGridView();
-            this.txtNomeLeitor = new System.Windows.Forms.TextBox();
-            this.lblNomeLeitor = new System.Windows.Forms.Label();
             this.colCodLeitor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNomeLeitor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtNomeLeitor = new System.Windows.Forms.TextBox();
+            this.lblNomeLeitor = new System.Windows.Forms.Label();
             this.txtCodLeitor = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dtgDadosLeitor)).BeginInit();
             this.SuspendLayout();
@@ -59,6 +60,23 @@
             this.dtgDadosLeitor.TabIndex = 7;
             this.dtgDadosLeitor.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgDadosLeitor_CellDoubleClick);
             // 
+            // colCodLeitor
+            // 
+            this.colCodLeitor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCodLeitor.FillWeight = 30F;
+            this.colCodLeitor.HeaderText = "Código";
+            this.colCodLeitor.MinimumWidth = 8;
+            this.colCodLeitor.Name = "colCodLeitor";
+            this.colCodLeitor.ReadOnly = true;
+            // 
+            // colNomeLeitor
+            // 
+            this.colNomeLeitor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colNomeLeitor.HeaderText = "Leitor";
+            this.colNomeLeitor.MinimumWidth = 8;
+            this.colNomeLeitor.Name = "colNomeLeitor";
+            this.colNomeLeitor.ReadOnly = true;
+            // 
             // txtNomeLeitor
             // 
             this.txtNomeLeitor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -77,23 +95,6 @@
             this.lblNomeLeitor.Size = new System.Drawing.Size(55, 20);
             this.lblNomeLeitor.TabIndex = 8;
             this.lblNomeLeitor.Text = "Nome:";
-            // 
-            // colCodLeitor
-            // 
-            this.colCodLeitor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colCodLeitor.FillWeight = 30F;
-            this.colCodLeitor.HeaderText = "Código";
-            this.colCodLeitor.MinimumWidth = 8;
-            this.colCodLeitor.Name = "colCodLeitor";
-            this.colCodLeitor.ReadOnly = true;
-            // 
-            // colNomeLeitor
-            // 
-            this.colNomeLeitor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colNomeLeitor.HeaderText = "Leitor";
-            this.colNomeLeitor.MinimumWidth = 8;
-            this.colNomeLeitor.Name = "colNomeLeitor";
-            this.colNomeLeitor.ReadOnly = true;
             // 
             // txtCodLeitor
             // 
@@ -115,6 +116,7 @@
             this.Controls.Add(this.dtgDadosLeitor);
             this.Controls.Add(this.txtNomeLeitor);
             this.Controls.Add(this.lblNomeLeitor);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormBuscaLeitor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormBuscaLeitor";

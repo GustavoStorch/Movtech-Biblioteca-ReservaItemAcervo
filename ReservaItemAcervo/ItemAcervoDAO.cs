@@ -22,7 +22,7 @@ namespace ReservaItemAcervo
             using (SqlCommand command = Connection.CreateCommand())
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT codItem, nome, numExemplar, tipoItem, localizacao, statusItem FROM mvtBibItemAcervo WHERE statusItem = 'Reservado' OR statusItem = 'Emprestado' ORDER BY codItem");
+                sql.AppendLine("SELECT codItem, nome, numExemplar, tipoItem, localizacao, statusItem FROM mvtBibItemAcervo WHERE statusItem = 'Emprestado' ORDER BY codItem");
                 command.CommandText = sql.ToString();
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
